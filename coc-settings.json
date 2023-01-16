@@ -1,0 +1,10 @@
+{
+  "snippets.ultisnips.pythonPrompt": false,
+  "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.10/bin/python3.10",
+  "html.autoClosingTags": true,
+  "clangd.fallbackFlags": ["-std=c++17"],
+  "diagnostic.errorSign": "死",
+  "diagnostic.warningSign": "あ",
+  "diagnostic.virtualText": false,
+  "diagnostic.checkCurrentLine": true
+}
