@@ -6,10 +6,13 @@
 :set smarttab
 :set softtabstop=4
 
+:let loaded_gzip=1
+
 packadd termdebug
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'ap/vim-css-color'
@@ -27,14 +30,19 @@ Plug 'folke/lsp-colors.nvim'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/nerdcommenter'
 Plug 'mfussenegger/nvim-dap'
+Plug 'jbyuki/nabla.nvim'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
-let g:gruvbox_material_dim_inactive_windows = 1
+let g:gruvbox_material_dim_inactive_windows = 0
 let g:gruvbox_material_diagnostic_text_highlight = 1
 let g:gruvbox_material_transparent_background = 2
-let g:airline_theme = 'gruvbox_material'
 let g:gruvbox_material_foreground = 'original'
+
+let g:airline_powerline_fonts=1
+
+let g:airline_theme = 'gruvbox_material'
 
 colorscheme gruvbox-material
 
@@ -49,17 +57,20 @@ let g:floaterm_position = 'rightbelow'
 let g:floaterm_width = 1.0
 let floaterm_height = 0.3
 let floaterm_borderchars = ''
+hi FloaternBorder guifg=orange
 
 let g:floaterm_keymap_kill = '<F6>'
 let g:floaterm_keymap_hide = '<F8>'
 let g:floaterm_keymap_show = '<F9>'
 nmap <F7> :FloatermNew --cwd=<buffer><CR>
+
 vmap ÷ <plug>NERDCommenterToggle
+nmap ÷ <plug>NERDCommenterToggle
+
 lua require('basic')
 nmap <F10> :Termdebug<CR>
 let g:termdebug_wide=1
 
-hi FloaternBorder guifg=orange
 
 
 " May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
@@ -68,6 +79,9 @@ set encoding=utf-8
 " Some servers have issues with backup files, see #649
 set nobackup
 set nowritebackup
+set nocompatible
+filetype plugin on
+syntax on
 
 " Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
 " delays and poor user experience
@@ -227,5 +241,12 @@ nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+nmap <leader>tb :Tagbar<CR>
+
 let g:airline#extensions#coc#enabled = 1
 
+nnoremap <leader>p :lua require("nabla").popup()<CR> " Customize with popup({border = ...})  : `single` (default), `double`, `rounded`
